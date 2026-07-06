@@ -325,9 +325,14 @@ http://localhost:5173
 
 
 
-# 👨‍💻 Author
 
-**Abraruddin**
+## 👨‍💻 Developer
+
+**Abrar Shaikh**
+
+📧 Email: uddinabru@gmail.com.com
+
+💼 LinkedIn: https://www.linkedin.com/in/abrar-java-developer/
 
 Java Full Stack Developer
 
