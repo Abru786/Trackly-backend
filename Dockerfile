@@ -1,19 +1,37 @@
-FROM eclipse-temurin:17-jdk
+#FROM eclipse-temurin:17-jdk
+#
+#WORKDIR /app
+#
+#COPY .mvn .mvn
+#COPY mvnw .
+#COPY pom.xml .
+#
+#
+#RUN chmod +x mvnw
+#
+#RUN ./mvnw dependency:go-offline
+#
+#COPY src src
+#
+#RUN ./mvnw clean package -DskipTests
+#EXPOSE 8080
+
+FROM maven:3.9.8-eclipse-temurin-17 AS build
 
 WORKDIR /app
 
-COPY .mvn .mvn
-COPY mvnw .
 COPY pom.xml .
+COPY src ./src
 
+RUN mvn clean package -DskipTests
 
-RUN chmod +x mvnw
+FROM eclipse-temurin:17-jre
 
-RUN ./mvnw dependency:go-offline
+WORKDIR /app
 
-COPY src src
+COPY --from=build /app/target/*.jar app.jar
 
-RUN ./mvnw clean package -DskipTests
 EXPOSE 8080
+
 
 ENTRYPOINT ["java","-jar","trackly-app.jar"]
